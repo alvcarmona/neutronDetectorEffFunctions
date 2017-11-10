@@ -59,12 +59,12 @@ def read_cross_section(lambdalist):
     # check if interpolation works
     # xnew = np.linspace(xlog[0], xlog[100], num=41, endpoint=True)
     # plt.plot(xlog, ylog, 'o', xnew, f(xnew), '--')
-    print lamen
-    print sigma
+    print (lamen)
+    print (sigma)
     plt.show()
     return sigma
 
 
 if __name__ == '__main__':
     # b.ranges(200, '10B4C 2.24g/cm3')
-    print aluminium(200, [[1.8,100]], 90)
+    #print aluminium(200, [[1.8,100]], 90)
