@@ -7,8 +7,9 @@ setup(
   author = 'acarmona',
   author_email = 'acarmona@opendeusto.es',
   url = 'https://github.com/alvcarmona/neutronDetectorEffFunctions', # URL to the github repo
-  download_url = 'https://github.com/alvcarmona/neutronDetectorEffFunctions/archive/0.1.2.tar.gz',
+  download_url = 'https://github.com/alvcarmona/neutronDetectorEffFunctions/archive/0.1.3.tar.gz',
   keywords = ['science'],
   classifiers = [],
+  include_package_data=True
 )
 
