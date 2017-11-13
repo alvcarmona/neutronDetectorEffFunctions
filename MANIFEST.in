@@ -1,1 +1,3 @@
-recursive-include data *
+recursive-include neutron_detector_eff_functions/data/B10/10B4C2.20 *
+recursive-include neutron_detector_eff_functions/data/B10/10B4C2.24 *
+include neutron_detector_eff_functions/data/B10/B10CrossSect_(n,a).txt
