@@ -14,7 +14,6 @@ setup(
         'numpy',
         'matplotlib',
         'scipy',
-        'pylab',
     ],
     classifiers=[],
     include_package_data=True
