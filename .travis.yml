@@ -1,0 +1,12 @@
+language: python
+python:
+  - "2.7"
+cache: pip
+install:
+  - pip install -r requirements.txt
+deploy:
+  provider: pypi
+  user: "alvcarmona"
+  password: "Your password"
+
+secure: "h0XyLa7B4Cvml+x/oCWEodHilqVr7oF1/7WedawpvVbJeyu57R/DEUpxZJe0Jq8yI16VO8B30QFU4LaOvZTq5hCjxXMcwmPVZNFL3r9e2dH3IQXESXRBPn0vQy7c4QGjJpdEYBA+v6qQ1Mh3KYjcdyfCEWkRveu4g5D1Vk47LQn45jRZMLQylwYspBu68mUhE4pS26CnYWqYDQNjf5lSBEkspOydxxBcnwATEpd3S0utuoxB5FDxeED/Kq4Q9q0WK/McrWFOnbpZ2zap5E/Xkn9JErTAq6jg+o7dvCkCjSvx1i3vL0m/obBgie5ctDKvKdX1aYFqjkxBKvsNHBrUGArn83t6p1hdrY4Ss/pdv88tCuj5jTyaLg17gKhDmopfEVu1wNTjOhGe+O9mUb7/nnfASIhoIZVOFYDYoqL4bl0yiyr6T7ePvugz6LRuBxBhqjZvm6/gU9O0ASvHojOdmMfmF766aW7kz0PZwsX4Uf35NfbUDaWSRPzaRREXtAkRbNsGZI/5yHK6+LQMoeh4EKQZFFjUyvV7G7ZOoU7ZWMlsqoiMRvh8Hg4I8tD9SpEzElEQthT9Q5KAcxsk0PQRCFK7padYfmdrqLQHWGH+qNRElF+ll/JxHyP2HwLas8NbIroXqytKSbpTWTZ0OTHPymkunqXuKJEaGpDO3rmx/oQ="
