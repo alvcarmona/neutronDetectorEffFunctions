@@ -7,10 +7,10 @@ from pylab import exp
 from bisect import bisect_left
 
 from scipy import interpolate
-import B10
-import Aluminium
-import efftools
-import Blade
+import neutron_detector_eff_functions.B10 as B10
+import neutron_detector_eff_functions.Aluminium as Aluminium
+import neutron_detector_eff_functions.efftools as efftools
+import neutron_detector_eff_functions.Blade as Blade
 import copy
 import json
 

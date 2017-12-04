@@ -8,10 +8,10 @@ from bisect import bisect_left
 import matplotlib.pyplot as plt
 
 from scipy import interpolate
-import B10
-import Aluminium
-import efftools
-import Blade
+import neutron_detector_eff_functions.B10 as B10
+import neutron_detector_eff_functions.Aluminium as Aluminum
+import neutron_detector_eff_functions.efftools as efftools
+import neutron_detector_eff_functions.Blade as Blade
 import copy
 import json
 

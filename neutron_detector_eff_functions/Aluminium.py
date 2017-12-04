@@ -64,7 +64,3 @@ def read_cross_section(lambdalist):
     plt.show()
     return sigma
 
-
-if __name__ == '__main__':
-    # b.ranges(200, '10B4C 2.24g/cm3')
-    #print aluminium(200, [[1.8,100]], 90)

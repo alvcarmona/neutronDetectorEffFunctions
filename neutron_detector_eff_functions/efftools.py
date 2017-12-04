@@ -366,7 +366,7 @@ def efficparam(thickness,sigma_eq,ranges,varargin):
 #return sigmanum
 
 if __name__=='__main__':
-	#print efficiency2particles(3,2,1,1)
+	#t efficiency2particles(3,2,1,1)
     #print efficiency4boron(1, 2.8, 1.1, 3, 1.3, 3)
 	#print 'ciao'
     print ()
