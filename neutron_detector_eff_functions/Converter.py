@@ -13,10 +13,10 @@ class Converter:
 
     def __init__(self, parent=None):
         self.configurations = {'10B4C 2.24g/cm3': {
-            'alpha06': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/../data/B10/IONIZ_Linkoping_Alpha06.txt", unpack=True, skiprows=27),
-            'alpha94': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/../data/B10/IONIZ_Linkoping_Alpha94.txt", unpack=True, skiprows=27),
-            'Li06': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/../data/B10/IONIZ_Linkoping_Li06.txt", unpack=True, skiprows=27),
-            'Li94': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/../data/B10/IONIZ_Linkoping_Li94.txt", unpack=True, skiprows=27),
+            'alpha06': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/IONIZ_Linkoping_Alpha06.txt", unpack=True, skiprows=27),
+            'alpha94': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/IONIZ_Linkoping_Alpha94.txt", unpack=True, skiprows=27),
+            'Li06': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/IONIZ_Linkoping_Li06.txt", unpack=True, skiprows=27),
+            'Li94': np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/IONIZ_Linkoping_Li94.txt", unpack=True, skiprows=27),
         }
         }
 
