@@ -37,7 +37,7 @@ class Detector:
         varargin = 1
         result = []
         if self.single:
-            print 'Boron single layer calculation '
+            print ('Boron single layer calculation ')
             result=[[0,0],[0,0]]
             c=0
             for s in sigma:
@@ -46,7 +46,7 @@ class Detector:
                 result[1][0] = result[1][0] + resultTemp[2][0]*self.wavelength[c][1]*0.01
                 c+=1
         else:
-            print 'Boron multi-blade double coated calculation '
+            print ('Boron multi-blade double coated calculation ')
             thickness = []
             for b in self.blades:
                thickness.append(b.backscatter)
@@ -285,7 +285,7 @@ class Detector:
         wavelength = self.wavelength
         # check polichromatic wavelength
         if len(self.wavelength) > 1:
-            print 'optimization for polichromatic wavelength'
+            print ('optimization for polichromatic wavelength')
             self.wavelength = [[self.calculate_barycenter(), 100]]
         sigma = self.calculate_sigma()
         sigma = sigma[0]
@@ -355,7 +355,7 @@ class Detector:
             # Access data
             return detector
         except (ValueError, KeyError, TypeError):
-            print "JSON format error"
+            print ("JSON format error")
 
     def to_json(self):
         d = {}
