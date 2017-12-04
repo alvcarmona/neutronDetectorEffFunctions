@@ -86,7 +86,7 @@ class B10:
         c0 = 0
         for l in lambdalist:
             lamen.append(((ht ** 2) * 4 * math.pi ** 2) / (2 * nmass * (l[0] ** 2)) * 1e20 * 6.24e18)
-        x, y = np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/B10CrossSect_(n,a).txt", delimiter=',', unpack=True)
+        x, y = np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/B10CrossSect_(n,a).py", delimiter=',', unpack=True)
         xlog = []
         ylog = []
         lamenlog =[]
