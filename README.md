@@ -4,7 +4,7 @@
 
 Functions for calculation of efficiency for neutron detectors based on B10
 
-Working on python 2.7 and >+3.4
+Working on python 2.7 and >=3.4
 
 ####Installation:
 ```
