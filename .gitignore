@@ -1,3 +1,8 @@
 .DS_Store
 .idea
 dist
+.cache/
+Envtest/
+neutron_detector_eff_functions/__pycache__/
+tests/__pycache__/
+tests/*.pyc

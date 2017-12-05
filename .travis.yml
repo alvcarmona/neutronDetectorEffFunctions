@@ -12,7 +12,7 @@ cache: pip
 install:
   - pip install -r requirements.txt pytest
 script:
-  - pytest
+  - python -m pytest
 deploy:
   provider: pypi
   user: "alvcarmona"
