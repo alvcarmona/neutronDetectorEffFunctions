@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/alvcarmona/neutronDetectorEffFunctions.svg?branch=0.1.6)](https://travis-ci.org/alvcarmona/neutronDetectorEffFunctions)
+[![Build Status](https://travis-ci.org/alvcarmona/neutronDetectorEffFunctions.svg?branch=master)](https://travis-ci.org/alvcarmona/neutronDetectorEffFunctions)
 
 # neutronDetectorEffFunctions
 
