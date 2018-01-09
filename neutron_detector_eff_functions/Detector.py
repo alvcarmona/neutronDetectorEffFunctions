@@ -150,8 +150,8 @@ class Detector:
         ax.plot(0, 0)
         ax.plot(0, len(result[0]) + 1)
         # ax.plot(nb + 1, 0)
-        ax.plot(1, result[0][0] * 100, 'o', label=" BS", color='red')
-        ax.plot(1, result[1][0] * 100, 'o', label=" TS", color='b')
+        ax.plot(1, result[0][0] * 100, 'o', label=" Backscatering", color='red')
+        ax.plot(1, result[1][0] * 100, 'o', label=" Transmission", color='b')
         ax.legend(numpoints=1)
         ax.grid(True)
         return ax
@@ -180,8 +180,8 @@ class Detector:
         if self.single:
             #TODO Poli sigma
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
-            bx.plot(thickVsEff[0], thickVsEff[1], label=" BS")
-            bx.plot(thickVsEff[0], thickVsEff[2], label=" T")
+            bx.plot(thickVsEff[0], np.array(thickVsEff[1])*100, label=" Backscattering")
+            bx.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             bx.legend(numpoints=1)
             bx.grid(True)
             bx.set_xlabel('Blade thickness')
@@ -193,11 +193,11 @@ class Detector:
 
             thickVsEff = efftools.metadata_samethick_vs_thickandnb(sigmalist, ranges, len(blades))
             self.metadata.update({'thickVsEff': thickVsEff})
-            bx.plot(thickVsEff[0], thickVsEff[1])
+            bx.plot(thickVsEff[0], np.array(thickVsEff[1])*100)
             bx.grid(True)
             bx.set_xlabel('Blade thickness')
             bx.set_ylabel('Detector efficiency (%)')
-            line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, result[1]],
+            line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, np.array(result[1])*100],
                            '--')
             plt.setp(line, 'color', 'k', 'linewidth', 0.5)
         if self.single:
@@ -209,7 +209,7 @@ class Detector:
             plt.setp(line4, 'color', 'k', 'linewidth', 0.5)
             plt.setp(line5, 'color', 'k', 'linewidth', 0.5)
         else:
-            line2 = bx.plot([0, self.blades[0].backscatter], [result[1], result[1]], '--')
+            line2 = bx.plot([0, np.array(self.blades[0].backscatter)*100], [np.array(result[1])*100, np.array(result[1])*100], '--')
         plt.setp(line2, 'color', 'k', 'linewidth', 0.5)
       #  ticks = bx.get_yticks() * 100
        # bx.set_yticklabels(ticks)
@@ -238,8 +238,8 @@ class Detector:
         if self.single:
             #TODO Poli sigma
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
-            bx.plot(thickVsEff[0], thickVsEff[1], label=" BS")
-            bx.plot(thickVsEff[0], thickVsEff[2], label=" T")
+            bx.plot(thickVsEff[0], np.array(thickVsEff[1])*100, label=" Backscatering")
+            bx.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             bx.legend(numpoints=1)
             bx.grid(True)
             bx.set_xlabel('Blade thickness')
@@ -251,24 +251,24 @@ class Detector:
 
             thickVsEff = efftools.metadata_samethick_vs_thickandnb(sigmalist, ranges, len(blades))
             self.metadata.update({'thickVsEff': thickVsEff})
-            bx.plot(thickVsEff[0], thickVsEff[1])
+            bx.plot(thickVsEff[0],np.array(thickVsEff[1])*100)
             bx.grid(True)
             bx.set_xlabel('Blade thickness')
             bx.set_ylabel('Detector efficiency (%)')
             line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, result[1]],
                            '--')
-            plt.setp(line, 'color', 'k', 'linewidth', 0.5)
+            plt.setp(line, 'color', 'r', 'linewidth', 0.5)
         if self.single:
             line2 = bx.plot([0, self.blades[0].backscatter], [result[1][0], result[1][0]], '--')
             line3 = bx.plot([0, self.blades[0].backscatter], [result[0][0], result[0][0]], '--')
             line4 = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [result[0][0], 0], '--')
             line5 = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [result[1][0], 0], '--')
-            plt.setp(line3, 'color', 'k', 'linewidth', 0.5)
-            plt.setp(line4, 'color', 'k', 'linewidth', 0.5)
-            plt.setp(line5, 'color', 'k', 'linewidth', 0.5)
+            plt.setp(line3, 'color', 'r', 'linewidth', 0.5)
+            plt.setp(line4, 'color', 'r', 'linewidth', 0.5)
+            plt.setp(line5, 'color', 'r', 'linewidth', 0.5)
         else:
-            line2 = bx.plot([0, self.blades[0].backscatter], [result[1], result[1]], '--')
-        plt.setp(line2, 'color', 'k', 'linewidth', 0.5)
+            line2 = bx.plot([0, np.array(self.blades[0].backscatter)*100], [result[1], result[1]], '--')
+        plt.setp(line2, 'color', 'r', 'linewidth', 0.5)
       #  ticks = bx.get_yticks() * 100
        # bx.set_yticklabels(ticks)
         return bx
@@ -300,8 +300,8 @@ class Detector:
         plt.subplot(111)
         if self.single:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
-            plt.plot(thickVsEff[0], thickVsEff[1], label=" BS")
-            plt.plot(thickVsEff[0], thickVsEff[2], label=" T")
+            plt.plot(thickVsEff[0], np.array(thickVsEff[1])*100, label=" Backscattering")
+            plt.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             plt.legend(numpoints=1)
             plt.grid(True)
             plt.xlabel('Blade thickness')
@@ -312,17 +312,17 @@ class Detector:
         else:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb(sigmalist, ranges, len(blades))
             self.metadata.update({'thickVsEff': thickVsEff})
-            plt.plot(thickVsEff[0], thickVsEff[1])
+            plt.plot(thickVsEff[0], np.array(thickVsEff[1])*100)
             plt.grid(True)
             plt.xlabel('Blade thickness')
             plt.ylabel('Detector efficiency (%)')
-            line = plt.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, result[1]],
+            line = plt.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, np.array(result[1])*100],
                            '--')
             plt.setp(line, 'color', 'k', 'linewidth', 0.5)
         if self.single:
             line2 = plt.plot([0, self.blades[0].backscatter], [result[1][0], result[1][0]], '--')
         else:
-            line2 = plt.plot([0, self.blades[0].backscatter], [result[1], result[1]], '--')
+            line2 = plt.plot([0, self.blades[0].backscatter], [np.array(result[1])*100, np.array(result[1])*100], '--')
         plt.setp(line2, 'color', 'k', 'linewidth', 0.5)
       #  ticks = bx.get_yticks() * 100
        # bx.set_yticklabels(ticks)
@@ -383,7 +383,7 @@ class Detector:
             y = efftools.metadata_diffthick_vs_wave(sigmaeq, blades, ranges, len(blades))
         cx = figure.add_subplot(111)
         self.metadata.update({'effVsWave': [sigmalist, y]})
-        cx.plot(sigmalist, y, color='g')
+        cx.plot(sigmalist, np.array(y)*100, color='g')
         if self.single:
             cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[1][0]], '--',
                     color='k')
@@ -427,16 +427,16 @@ class Detector:
         cx = plt.figure(1)
         plt.subplot(111)
         self.metadata.update({'effVsWave': [sigmalist, y]})
-        plt.plot(sigmalist, y, color='g')
+        plt.plot(sigmalist, np.array(y)*100, color='g')
         if len(self.wavelength) == 1:
             if self.single:
                 plt.plot([wavelength[0][0], wavelength[0][0]], [0, result[1][0]], '--',
                         color='k')
                 plt.plot([0, wavelength[0][0]], [result[1][0], result[1][0]], '--', color='k')
             else:
-                plt.plot([wavelength[0][0], wavelength[0][0]], [0, result[1]], '--',
+                plt.plot([wavelength[0][0], wavelength[0][0]], [0, np.array(result[1])*100], '--',
                         color='k')
-                plt.plot([0, wavelength[0][0]], [result[1], result[1]], '--', color='k')
+                plt.plot([0, wavelength[0][0]], [np.array(result[1])*100, np.array(result[1])*100], '--', color='k')
 
         plt.grid(True)
         plt.xlabel('Neutron wavelength (Angstrom)')
@@ -566,7 +566,7 @@ class Detector:
             wave =[]
             for w in data.get('wavelength'):
                 wave.append([w.get('angstrom'), w.get('%')])
-            detector = Detector.build_detector(len(data.get('blades')),data.get('blades')[0].get('backscatter'),data.get('blades')[0].get('substrate'),wave, data.get('angle'), data.get('threshold'), data.get('single'), data.get('converterConfiguration'))
+            detector = Detector.build_detector(len(data.get('blades')),data.get('blades')[0].get('backscatter'),data.get('blades')[0].get('substrate'),wave, data.get('angle'), data.get('threshold'), data.get('single'), data.get('converter'))
             # Access data
             return detector
         except (ValueError, KeyError, TypeError):
