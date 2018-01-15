@@ -97,7 +97,7 @@ class Detector:
         if eff is None:
             eff = self.calculate_eff()
         ax = figure.add_subplot(111)
-        ax.set_xlabel('Blade Depth')
+        ax.set_xlabel('Blade number')
         ax.set_ylabel('Blade efficiency %')
       #  ax.set_ylim([0, (eff[1] * 100 + 1)])
         ax.set_xlim([0, len(eff[0]) + 1])

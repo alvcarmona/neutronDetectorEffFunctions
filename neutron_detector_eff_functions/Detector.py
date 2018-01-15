@@ -184,7 +184,7 @@ class Detector:
             bx.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             bx.legend(numpoints=1)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness')
+            bx.set_xlabel('Blade thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
           #  line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter],
            #                [0, result[1][0] * 100], '--')
@@ -195,7 +195,7 @@ class Detector:
             self.metadata.update({'thickVsEff': thickVsEff})
             bx.plot(thickVsEff[0], np.array(thickVsEff[1])*100)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness')
+            bx.set_xlabel('Blade thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
             line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, np.array(result[1])*100],
                            '--')
@@ -242,7 +242,7 @@ class Detector:
             bx.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             bx.legend(numpoints=1)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness')
+            bx.set_xlabel('Blade thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
           #  line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter],
            #                [0, result[1][0] * 100], '--')
@@ -253,7 +253,7 @@ class Detector:
             self.metadata.update({'thickVsEff': thickVsEff})
             bx.plot(thickVsEff[0],np.array(thickVsEff[1])*100)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness')
+            bx.set_xlabel('Blade thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
             line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, result[1]],
                            '--')
@@ -304,7 +304,7 @@ class Detector:
             plt.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             plt.legend(numpoints=1)
             plt.grid(True)
-            plt.xlabel('Blade thickness')
+            plt.xlabel(r'Blade thickness ($\mu$m)')
             plt.ylabel('Detector efficiency (%)')
           #  line = plt.plot([self.blades[0].backscatter, self.blades[0].backscatter],
            #                [0, result[1][0] * 100], '--')
@@ -314,7 +314,7 @@ class Detector:
             self.metadata.update({'thickVsEff': thickVsEff})
             plt.plot(thickVsEff[0], np.array(thickVsEff[1])*100)
             plt.grid(True)
-            plt.xlabel('Blade thickness')
+            plt.xlabel(r'Blade thickness ($\mu$m)')
             plt.ylabel('Detector efficiency (%)')
             line = plt.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, np.array(result[1])*100],
                            '--')
@@ -393,7 +393,7 @@ class Detector:
                     color='k')
             cx.plot([0, wavelength[0][0]], [result[1], result[1]], '--', color='k')
         cx.grid(True)
-        cx.set_xlabel('Neutron wavelength (Angstrom)')
+        cx.set_xlabel(r'Neutron wavelength ($\AA$)')
         cx.set_ylabel('Detector efficiency (%)')
       #  ticks = cx.get_yticks() * 100
        # cx.set_yticklabels(ticks)
@@ -439,7 +439,7 @@ class Detector:
                 plt.plot([0, wavelength[0][0]], [np.array(result[1])*100, np.array(result[1])*100], '--', color='k')
 
         plt.grid(True)
-        plt.xlabel('Neutron wavelength (Angstrom)')
+        plt.xlabel(r'Neutron wavelength ($\AA$)')
         plt.ylabel('Detector efficiency (%)')
       #  ticks = cx.get_yticks() * 100
        # cx.set_yticklabels(ticks)
