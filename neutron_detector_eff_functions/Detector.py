@@ -184,7 +184,7 @@ class Detector:
             bx.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             bx.legend(numpoints=1)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness ($\mu$m)')
+            bx.set_xlabel('Converter thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
           #  line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter],
            #                [0, result[1][0] * 100], '--')
@@ -195,7 +195,7 @@ class Detector:
             self.metadata.update({'thickVsEff': thickVsEff})
             bx.plot(thickVsEff[0], np.array(thickVsEff[1])*100)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness ($\mu$m)')
+            bx.set_xlabel('Converter thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
             line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, np.array(result[1])*100],
                            '--')
@@ -242,7 +242,7 @@ class Detector:
             bx.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
             bx.legend(numpoints=1)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness ($\mu$m)')
+            bx.set_xlabel('Converter thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
           #  line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter],
            #                [0, result[1][0] * 100], '--')
@@ -253,7 +253,7 @@ class Detector:
             self.metadata.update({'thickVsEff': thickVsEff})
             bx.plot(thickVsEff[0],np.array(thickVsEff[1])*100)
             bx.grid(True)
-            bx.set_xlabel('Blade thickness ($\mu$m)')
+            bx.set_xlabel('Converter thickness ($\mu$m)')
             bx.set_ylabel('Detector efficiency (%)')
             line = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, result[1]],
                            '--')
@@ -302,9 +302,11 @@ class Detector:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
             plt.plot(thickVsEff[0], np.array(thickVsEff[1])*100, label=" Backscattering")
             plt.plot(thickVsEff[0], np.array(thickVsEff[2])*100, label=" Transmission")
+            self.metadata.update({'thickVsEffBack': [thickVsEff[0], np.array(thickVsEff[1])]})
+            self.metadata.update({'thickVsEffTrans': [thickVsEff[0], np.array(thickVsEff[2])]})
             plt.legend(numpoints=1)
             plt.grid(True)
-            plt.xlabel(r'Blade thickness ($\mu$m)')
+            plt.xlabel(r'Converter thickness ($\mu$m)')
             plt.ylabel('Detector efficiency (%)')
           #  line = plt.plot([self.blades[0].backscatter, self.blades[0].backscatter],
            #                [0, result[1][0] * 100], '--')
@@ -314,7 +316,7 @@ class Detector:
             self.metadata.update({'thickVsEff': thickVsEff})
             plt.plot(thickVsEff[0], np.array(thickVsEff[1])*100)
             plt.grid(True)
-            plt.xlabel(r'Blade thickness ($\mu$m)')
+            plt.xlabel(r'Converter thickness ($\mu$m)')
             plt.ylabel('Detector efficiency (%)')
             line = plt.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, np.array(result[1])*100],
                            '--')
@@ -566,7 +568,7 @@ class Detector:
             wave =[]
             for w in data.get('wavelength'):
                 wave.append([w.get('angstrom'), w.get('%')])
-            detector = Detector.build_detector(len(data.get('blades')),data.get('blades')[0].get('backscatter'),data.get('blades')[0].get('substrate'),wave, data.get('angle'), data.get('threshold'), data.get('single'), data.get('converter'))
+            detector = Detector.build_detector(len(data.get('blades')),data.get('blades')[0].get('backscatter'),data.get('blades')[0].get('substrate'),wave, data.get('angle'), data.get('threshold'), data.get('single'), data.get('converterConfiguration'))
             # Access data
             return detector
         except (ValueError, KeyError, TypeError):
