@@ -306,6 +306,20 @@ class Detector:
             self.metadata.update({'thickVsEffTrans': [thickVsEff[0], np.array(thickVsEff[2])]})
             plt.legend(numpoints=1)
             plt.grid(True)
+            meta = self.metadata.get('thickVsEffBack')
+            meta2 = self.metadata.get('thickVsEffTrans')
+            data = np.array([meta[0], meta[1]])
+            data2 = np.array([meta2[0], meta2[1]])
+            '''
+            datafile_id = open('/Users/alvarocbasanez/backscattering', 'w+')
+            datafile_id2 = open('/Users/alvarocbasanez/transmission', 'w+')
+            for a, am in zip(data[0], data[1]):
+                datafile_id.write("{}\t{}\n".format(a, am))
+            for a, am in zip(data2[0], data2[1]):
+                datafile_id2.write("{}\t{}\n".format(a, am))
+            datafile_id.close()
+            datafile_id2.close()
+            '''
             plt.xlabel(r'Converter thickness ($\mu$m)')
             plt.ylabel('Detector efficiency (%)')
           #  line = plt.plot([self.blades[0].backscatter, self.blades[0].backscatter],
