@@ -12,6 +12,7 @@ import neutron_detector_eff_functions.B10 as B10
 import neutron_detector_eff_functions.Aluminium as Aluminum
 import neutron_detector_eff_functions.efftools as efftools
 import neutron_detector_eff_functions.Blade as Blade
+import neutron_detector_eff_functions.PhsCalculator as phs
 import copy
 import json
 
@@ -61,6 +62,7 @@ class Detector:
             for i, r in enumerate(resultpoli):
                 for j, ewz in enumerate(resultpoli[i][0]):
                     result[0][j][0] = result[0][j][0] + ewz[0]*self.wavelength[i][1]*0.01
+                    result[0][j][1] = result[0][j][1] + ewz[1] * self.wavelength[i][1] * 0.01
                 result[1] = result[1] + resultpoli[i][1]*self.wavelength[i][1]*0.01
         return result
 
@@ -613,8 +615,13 @@ class Detector:
         d["wavelength"] = wavelength
         return d
 
+    def calculate_phs(self):
+        phs.calculatePhs(self.calculate_sigma(),self.wavelength[0][0],self.angle,self.blades[0].backscatter,self.threshold, self.calculate_ranges())
+
+
 
 if __name__ == '__main__':
-   #Detector.json_parser('/Users/alvarocbasanez/PycharmProjects/dg_efficiencycalculator/efficiencyCalculator/exports/detector1.json')
-   detector = Detector.detector(15,1,0,[[10,100]], 90, 100)
-   detector.optimize_thickness_diff()
+   detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
+   detector.calculate_eff()
+   detector.calculate_phs()
+   # detector.optimize_thickness_diff()

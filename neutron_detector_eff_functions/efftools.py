@@ -316,7 +316,7 @@ def mgeff_depth_profile(thickness, ranges, sigma, varargin):
 	efftotal = 0
 	for i, t in enumerate(thickness):
 		expi = exp(-2*sigma*cumthick)
-		eff.append([eff1blade[i][0]*expi, eff1blade[i][1]*(delta**i)])
+		eff.append([eff1blade[i][0]*expi*100, eff1blade[i][1]*(delta**i)*expi*100])
 		efftotal = efftotal + eff[i][0]
 		cumthick = cumthick+t
 	return eff, efftotal

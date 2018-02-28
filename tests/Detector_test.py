@@ -50,6 +50,9 @@ class Test_Detector:
      def test_calculate_eff(self):
         assert 1
 
+     def test_calculate_phs(self):
+        assert 1
+
      def test_calculate_sigma(self):
         assert 1
 
