@@ -40,12 +40,13 @@ class Detector:
         result = []
         if self.single:
             print ('Boron single layer calculation ')
-            result=[[0,0],[0,0]]
+            result=[[0,0],0]
             c=0
             for s in sigma:
                 resultTemp = efftools.efficiency4boron(self.blades[0].backscatter, ranges[0], ranges[1], ranges[2], ranges[3], s)
-                result[0][0] = result[0][0] + resultTemp[1][0]*self.wavelength[c][1]*0.01
-                result[1][0] = result[1][0] + resultTemp[2][0]*self.wavelength[c][1]*0.01
+                result[0][0] = result[0][0] + resultTemp[1][0]*self.wavelength[c][1]
+                result[0][1] = result[0][1] + resultTemp[2][0]*self.wavelength[c][1]
+                result[1] =result[1]+resultTemp[0][0]*100
                 c+=1
         else:
             print ('Boron multi-blade double coated calculation ')
@@ -621,7 +622,9 @@ class Detector:
 
 
 if __name__ == '__main__':
-   detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
-   detector.calculate_eff()
-   detector.calculate_phs()
+   #detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
+   #detector.calculate_eff()
+   #detector.calculate_phs()
    # detector.optimize_thickness_diff()
+   detector_single_mono = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, False,'10B4C 2.24g/cm3')
+   print(detector_single_mono.calculate_eff()[1])

@@ -1,6 +1,7 @@
 
 import json
 import os
+import pytest
 from neutron_detector_eff_functions import Detector
 
 
@@ -48,7 +49,14 @@ class Test_Detector:
         os.remove(filepath)
 
      def test_calculate_eff(self):
-        assert 1
+        detector_multigrid_mono = Detector.Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, False,'10B4C 2.24g/cm3')
+        detector_multigrid_poli = Detector.Detector.build_detector(15, 1, 0, [[10, 90], [1, 10]], 90, 100, False,'10B4C 2.24g/cm3')
+        detector_single_mono = Detector.Detector.build_detector(1, 1, 0, [[10, 100]], 90, 100, True, '10B4C 2.24g/cm3')
+        assert detector_multigrid_mono.calculate_eff()[1] == pytest.approx(73.71, 0.01)
+        assert detector_multigrid_poli.calculate_eff()[1] == pytest.approx(69.9, 0.01)
+        assert detector_single_mono.calculate_eff()[0][0] == pytest.approx(14.8, 0.01)
+        assert detector_single_mono.calculate_eff()[0][1] == pytest.approx(14.4, 0.01)
+        assert detector_single_mono.calculate_eff()[1] == pytest.approx(26.4, 0.01)
 
      def test_calculate_phs(self):
         assert 1
