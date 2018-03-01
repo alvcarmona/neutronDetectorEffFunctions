@@ -139,7 +139,6 @@ class Detector:
             nlist.append(n+1)
         self.metadata.update({'effvsdepth': [nlist,meta]})
 
-
     def plot_blade_figure_single(self, result, figure):
         """plots the efficiency of a single layer,
 
@@ -160,7 +159,6 @@ class Detector:
         ax.grid(True)
         return ax
 
-    #TODO change plot functions so they don't need arguments. Make a script function with the arguments that calls this
     def plot_thick_vs_eff(self, sigma, ranges, blades, result, figure):
         """plots the efficiency function for a set of thicknesses,
 
@@ -186,6 +184,7 @@ class Detector:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
             bx.plot(thickVsEff[0], np.array(thickVsEff[1]), label=" Backscattering")
             bx.plot(thickVsEff[0], np.array(thickVsEff[2]), label=" Transmission")
+            bx.plot(thickVsEff[0], np.array(thickVsEff[3]), label=" Total")
             bx.legend(numpoints=1)
             bx.grid(True)
             bx.set_xlabel('Converter thickness ($\mu$m)')
@@ -205,6 +204,7 @@ class Detector:
                            '--')
             plt.setp(line, 'color', 'k', 'linewidth', 0.5)
         if self.single:
+            '''''
             line2 = bx.plot([0, self.blades[0].backscatter], [result[1][0], result[1][0]], '--')
             line3 = bx.plot([0, self.blades[0].backscatter], [result[0][0], result[0][0]], '--')
             line4 = bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [result[0][0], 0], '--')
@@ -212,9 +212,10 @@ class Detector:
             plt.setp(line3, 'color', 'k', 'linewidth', 0.5)
             plt.setp(line4, 'color', 'k', 'linewidth', 0.5)
             plt.setp(line5, 'color', 'k', 'linewidth', 0.5)
+            '''''
         else:
             line2 = bx.plot([0, np.array(self.blades[0].backscatter)], [np.array(result[1]), np.array(result[1])], '--')
-        plt.setp(line2, 'color', 'k', 'linewidth', 0.5)
+            plt.setp(line2, 'color', 'k', 'linewidth', 0.5)
       #  ticks = bx.get_yticks() * 100
        # bx.set_yticklabels(ticks)
         return bx
@@ -376,7 +377,6 @@ class Detector:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb(sigmalist, ranges, len(blades))
             self.metadata.update({'thickVsEff': thickVsEff})
 
-
     def plot_wave_vs_eff(self,sigmaeq, sigmalist, ranges, blades, result, wavelength, figure):
         """plots the efficiency for a set of wavelengths,
 
@@ -403,9 +403,9 @@ class Detector:
         self.metadata.update({'effVsWave': [sigmalist, y]})
         cx.plot(sigmalist, np.array(y), color='g')
         if self.single:
-            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[1][0]], '--',
+            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[0][1]], '--',
                     color='k')
-            cx.plot([0, wavelength[0][0]], [result[1][0], result[1][0]], '--', color='k')
+            cx.plot([0, wavelength[0][0]], [result[0][1], result[0][1]], '--', color='k')
         else:
             cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[1]], '--',
                     color='k')
@@ -490,7 +490,6 @@ class Detector:
         y = efftools.metadata_diffthick_vs_wave(sigmaeq, blades, ranges, len(blades))
         self.metadata.update({'effVsWave': [sigmalist, y]})
 
-
     def optimize_thickness_same(self):
         """sets the thickness of all blades to the most optimal for all the blades with same thickness.
         """
@@ -542,7 +541,6 @@ class Detector:
         if len(self.wavelength) > 1:
             self.wavelength = wavelength
 
-
     @staticmethod
     def build_detector(nb, converterThickness, substrateThickness, wavelength, angle, threshold, single, converter):
 
@@ -574,7 +572,6 @@ class Detector:
         thick = self.blades[0].substrate
         varargin = Aluminium.aluminium(thick,self.wavelength,self.angle)
         return varargin[0]
-
 
     @staticmethod
     def json_parser(path):
