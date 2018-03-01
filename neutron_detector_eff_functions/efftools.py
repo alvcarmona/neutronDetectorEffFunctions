@@ -213,7 +213,7 @@ def metadata_samethick_vs_thickandnb(sigma_eq, ranges, nb):
 	for n in thicklist:
 		efftemp = 0
 		for s in sigma_eq:
-			efftemp = efftemp + mg_same_thick(s[0], ranges, n, nb)[0] * s[1]*0.01
+			efftemp = efftemp + mg_same_thick(s[0], ranges, n, nb)[0] * s[1]
 		eff.append(efftemp)
 	return thicklist, eff,
 
@@ -289,16 +289,20 @@ def metadata_samethick_vs_thickandnb_single(sigma_eq, ranges, nb):
 	thicklist = np.arange(0.0011, 10, 0.05)
 	effback = []
 	efftrans = []
+	efftotal = []
 	for n in thicklist:
 		c = 0
-		efftemp = [0,0]
+		efftemp = [0,0,0]
 		for s in sigma_eq:
-			efftemp[0] = efftemp[0] + efficiency4boron(n, ranges[0], ranges[1], ranges[2], ranges[3], s[0])[1][0]*s[1] * 0.01
-			efftemp[1] = efftemp[1] + efficiency4boron(n, ranges[0], ranges[1], ranges[2], ranges[3], s[0])[2][0] * s[1] * 0.01
+			rtemp = efficiency4boron(n, ranges[0], ranges[1], ranges[2], ranges[3], s[0])
+			efftemp[0] = efftemp[0] + rtemp[1][0]*s[1]
+			efftemp[1] = efftemp[1] + rtemp[2][0]*s[1]
+			efftemp[2] = efftemp[2] + rtemp[0][0]*s[1]
 			c += 1
 		effback.append(efftemp[0])
 		efftrans.append(efftemp[1])
-	return thicklist, effback, efftrans
+		efftotal.append(efftemp[2])
+	return thicklist, effback, efftrans, efftotal
 
 
 def mgeff_depth_profile(thickness, ranges, sigma, varargin):
@@ -316,7 +320,7 @@ def mgeff_depth_profile(thickness, ranges, sigma, varargin):
 	efftotal = 0
 	for i, t in enumerate(thickness):
 		expi = exp(-2*sigma*cumthick)
-		eff.append([eff1blade[i][0]*expi*100, eff1blade[i][1]*(delta**i)*expi*100])
+		eff.append([eff1blade[i][0]*expi, eff1blade[i][1]*(delta**i)*expi])
 		efftotal = efftotal + eff[i][0]
 		cumthick = cumthick+t
 	return eff, efftotal

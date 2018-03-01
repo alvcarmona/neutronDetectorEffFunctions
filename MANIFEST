@@ -7,6 +7,7 @@ neutron_detector_eff_functions/Blade.py
 neutron_detector_eff_functions/Converter.py
 neutron_detector_eff_functions/Detector.py
 neutron_detector_eff_functions/Detector_meta.py
+neutron_detector_eff_functions/PhsCalculator.py
 neutron_detector_eff_functions/__init__.py
 neutron_detector_eff_functions/efftools.py
 neutron_detector_eff_functions/scripts.py
