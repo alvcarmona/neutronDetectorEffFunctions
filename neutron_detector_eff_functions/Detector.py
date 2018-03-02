@@ -62,9 +62,9 @@ class Detector:
                 resultpoli.append(efftools.mgeff_depth_profile(thickness, ranges, s, varargin))
             for i, r in enumerate(resultpoli):
                 for j, ewz in enumerate(resultpoli[i][0]):
-                    result[0][j][0] = result[0][j][0] + ewz[0]*self.wavelength[i][1]*0.01
-                    result[0][j][1] = result[0][j][1] + ewz[1] * self.wavelength[i][1] * 0.01
-                result[1] = result[1] + resultpoli[i][1]*self.wavelength[i][1]*0.01
+                    result[0][j][0] = result[0][j][0] + ewz[0]*self.wavelength[i][1]
+                    result[0][j][1] = result[0][j][1] + ewz[1] * self.wavelength[i][1]
+                result[1] = result[1] + resultpoli[i][1]*self.wavelength[i][1]
         self.metadata.update({'eff': result})
         return result
 
@@ -113,8 +113,8 @@ class Detector:
         nlist = []
         for n in range(0, len(eff[0])):
             # Note that the plot displayed is the backscattering thickness
-            ax.plot(n + 1, eff[0][n][0] * 100, 'o', color='red')
-            meta.append(eff[0][n][0] * 100)
+            ax.plot(n + 1, eff[0][n][0] , 'o', color='red')
+            meta.append(eff[0][n][0] )
             nlist.append(n+1)
         self.metadata.update({'effvsdepth': [nlist,meta]})
         ax.grid(True)
@@ -135,7 +135,7 @@ class Detector:
         nlist = []
         for n in range(0, len(eff[0])):
             # Note that the plot displayed is the backscattering thickness
-            meta.append(eff[0][n][0] * 100)
+            meta.append(eff[0][n][0] )
             nlist.append(n+1)
         self.metadata.update({'effvsdepth': [nlist,meta]})
 
@@ -148,13 +148,13 @@ class Detector:
         ax = figure.add_subplot(111)
         ax.set_xlabel('Blade Number')
         ax.set_ylabel('Blade efficiency (%)')
-        ax.set_ylim([0, (result[1][0] * 100 + 1)])
+        ax.set_ylim([0, (result[0][1] + 1)])
         ax.set_xlim([0, 2] )
         ax.plot(0, 0)
-        ax.plot(0, len(result[0]) + 1)
+        ax.plot(0, len(result[0][0]) + 1)
         # ax.plot(nb + 1, 0)
-        ax.plot(1, result[0][0] * 100, 'o', label=" Backscatering", color='red')
-        ax.plot(1, result[1][0] * 100, 'o', label=" Transmission", color='b')
+        ax.plot(1, result[0][0], 'o', label=" Backscatering", color='red')
+        ax.plot(1, result[0][1], 'o', label=" Transmission", color='b')
         ax.legend(numpoints=1)
         ax.grid(True)
         return ax
@@ -448,9 +448,9 @@ class Detector:
         plt.plot(sigmalist, np.array(y), color='g')
         if len(self.wavelength) == 1:
             if self.single:
-                plt.plot([wavelength[0][0], wavelength[0][0]], [0, result[1][0]], '--',
+                plt.plot([wavelength[0][0], wavelength[0][1]], [0, result[0][1]], '--',
                         color='k')
-                plt.plot([0, wavelength[0][0]], [result[1][0], result[1][0]], '--', color='k')
+                plt.plot([0, wavelength[0][0]], [result[0][1], result[0][1]], '--', color='k')
             else:
                 plt.plot([wavelength[0][0], wavelength[0][0]], [0, np.array(result[1])], '--',
                         color='k')
