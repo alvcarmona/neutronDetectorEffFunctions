@@ -258,16 +258,18 @@ def metadata_diffthick_vs_wave(sigmaeq, blades, ranges, nb):
 		thickness.append(b.backscatter)
 	for sigma in sigmaeq:
 			effd = mgeff_depth_profile(thickness, ranges, sigma[0], 1)[1]
-			eff.append(effd)
+			eff.append(effd*100)
 	return eff
 
 
 def metadata_singleLayer_vs_wave(sigmaeq, thickness, ranges, nb):
-	eff = []
+	eff = [[],[],[]]
 	for sigma in sigmaeq:
-		#TODO Set up a way to differenciate selection of trans or back data
-		#back data
-		eff.append(efficiency4boron(thickness, ranges[0], ranges[1],ranges[2],ranges[3], sigma[0])[1][0])
+		result = efficiency4boron(thickness, ranges[0], ranges[1], ranges[2], ranges[3], sigma[0])
+		print(result)
+		eff[0].append(result[1][0]*100)#bs
+		eff[1].append(result[2][0]*100)#trans
+		eff[2].append(result[0][0]*100)#total
 	return eff
 
 def metadata_samethick_vs_thickandnb_single(sigma_eq, ranges, nb):

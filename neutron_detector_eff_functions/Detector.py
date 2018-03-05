@@ -148,13 +148,14 @@ class Detector:
         ax = figure.add_subplot(111)
         ax.set_xlabel('Blade Number')
         ax.set_ylabel('Blade efficiency (%)')
-        ax.set_ylim([0, (result[0][1] + 1)])
-        ax.set_xlim([0, 2] )
+        ax.set_ylim([0, (result[1] + 1)])
+        ax.set_xlim([0, 2])
         ax.plot(0, 0)
-        ax.plot(0, len(result[0][0]) + 1)
+        ax.plot(0, 1)
         # ax.plot(nb + 1, 0)
         ax.plot(1, result[0][0], 'o', label=" Backscatering", color='red')
         ax.plot(1, result[0][1], 'o', label=" Transmission", color='b')
+        ax.plot(1, result[1], 'o', label=" Total", color='g')
         ax.legend(numpoints=1)
         ax.grid(True)
         return ax
@@ -182,9 +183,13 @@ class Detector:
         if self.single:
             #TODO Poli sigma
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
-            bx.plot(thickVsEff[0], np.array(thickVsEff[1]), label=" Backscattering")
-            bx.plot(thickVsEff[0], np.array(thickVsEff[2]), label=" Transmission")
-            bx.plot(thickVsEff[0], np.array(thickVsEff[3]), label=" Total")
+            bx.plot(thickVsEff[0], np.array(thickVsEff[1]), label=" Backscattering", color='r')
+            bx.plot(thickVsEff[0], np.array(thickVsEff[2]), label=" Transmission", color='b')
+            bx.plot(thickVsEff[0], np.array(thickVsEff[3]), label=" Total", color='g')
+            bx.plot([self.blades[0].backscatter, self.blades[0].backscatter], [0, result[1]], '--', color='k',linewidth=0.7)
+            bx.plot([0, self.blades[0].backscatter], [result[0][0], result[0][0]], '--', color='k', linewidth=0.7)
+            bx.plot([0, self.blades[0].backscatter], [result[0][1], result[0][1]], '--', color='k', linewidth=0.7)
+            bx.plot([0, self.blades[0].backscatter], [result[1], result[1]], '--', color='k', linewidth=0.7)
             bx.legend(numpoints=1)
             bx.grid(True)
             bx.set_xlabel('Converter thickness ($\mu$m)')
@@ -401,14 +406,17 @@ class Detector:
             y = efftools.metadata_diffthick_vs_wave(sigmaeq, blades, ranges, len(blades))
         cx = figure.add_subplot(111)
         self.metadata.update({'effVsWave': [sigmalist, y]})
-        cx.plot(sigmalist, np.array(y), color='g')
+
         if self.single:
-            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[0][1]], '--',
-                    color='k')
+            cx.plot(sigmalist, np.array(y[0]), color='r', label='Backscattering' )
+            cx.plot(sigmalist, np.array(y[1]), color='b', label='Transmission' )
+            cx.plot(sigmalist, np.array(y[2]), color='g', label='Total')
+            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[0][1]], '--',color='k')
             cx.plot([0, wavelength[0][0]], [result[0][1], result[0][1]], '--', color='k')
+            cx.legend(numpoints=1)
         else:
-            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[1]], '--',
-                    color='k')
+            cx.plot(sigmalist, np.array(y), color='g')
+            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[1]], '--',color='k')
             cx.plot([0, wavelength[0][0]], [result[1], result[1]], '--', color='k')
         cx.grid(True)
         cx.set_xlabel(r'Neutron wavelength ($\AA$)')
