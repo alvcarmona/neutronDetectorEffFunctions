@@ -17,7 +17,7 @@ def calculatePhs(sigma, wavelength, inclination, thickness, threshold, ranges, s
     #pf = '/Users/francescopiscitelli/Documents/MATLAB/000_data/SRIM_real_10B4C_layer_Linkoping';
     #fprintf('\n Linkoping coatings used as default for stopping power! \n')
 
-    Efrag = np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/10B4C224/Erim_fragments.txt", unpack=True)
+    Efrag = np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/B10/10B4C224/Erim_fragments.py", unpack=True)
 
     L = np.arange(0.001, 8, 0.05) #distance traveled in boron
 
