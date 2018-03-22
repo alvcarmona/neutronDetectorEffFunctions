@@ -55,16 +55,26 @@ def calculatePhs(sigma, wavelength, inclination, thickness, threshold, ranges, s
 
     #prob = [0 0 0 0;prob];
     #probT = [0 0 0 0;probT];
-    energ = [EOfrag,energ]
-
-
-   # DE = np.diff(energ,1,1)
+    #energ = [EOfrag,energ]
+    #DE = np.diff(energ,1,1)
     #DE = [0 0 0 0;DE];
-  #  effic = np.diag(prob*DE)
-
-
-
-    return energ, pe, peT
+    #effic = np.diag(prob*DE)
+    maxxi = max(EOfrag)
+    #Etot = 0:1: maxxi + 10;
+    #prob2 = zeros(length(Etot), 4);
+    #prob2T = zeros(length(Etot), 4);
+    '''for i in range(1,4):
+        indextemp = find_nearest(energ[j],L[k])
+        index = indextemp
+        prob2temp =np.interp(energ[j][index],prob) #prob2temp = interp1(Energ(index, j), prob(index, j), Etot);
+        prob2temp = np.transpose(prob2temp) #prob2temp = prob2temp';
+        pg =find_nearest()#pg = find(isfinite(prob2temp));
+        #prob2(pg, j) = prob2temp(pg, 1);
+        #prob2tempT = interp1(Energ(index, j), probT(index, j), Etot);
+        prob2tempT = np.interp(prob2tempT)
+        pgt = find_nearest()#pgT = find(isfinite(prob2tempT));
+        #prob2T(pgT, j) = prob2tempT(pgT, 1);'''
+    return Efrag
 
 def find_nearest(array,value):
     idx = (np.abs(array-value)).argmin()

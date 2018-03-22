@@ -9,12 +9,12 @@ import matplotlib.pyplot as plt
 
 from scipy import interpolate
 import neutron_detector_eff_functions.B10 as B10
-import neutron_detector_eff_functions.Aluminium as Aluminum
 import neutron_detector_eff_functions.efftools as efftools
 import neutron_detector_eff_functions.Blade as Blade
 import neutron_detector_eff_functions.PhsCalculator as phs
 import copy
 import json
+import neutron_detector_eff_functions.Aluminium as Aluminium
 
 
 class Detector:
@@ -411,8 +411,10 @@ class Detector:
             cx.plot(sigmalist, np.array(y[0]), color='r', label='Backscattering' )
             cx.plot(sigmalist, np.array(y[1]), color='b', label='Transmission' )
             cx.plot(sigmalist, np.array(y[2]), color='g', label='Total')
-            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[0][1]], '--',color='k')
-            cx.plot([0, wavelength[0][0]], [result[0][1], result[0][1]], '--', color='k')
+            cx.plot([wavelength[0][0], wavelength[0][0]], [0, result[1]], '--', color='k', linewidth=0.7)
+            cx.plot([0, wavelength[0][0]], [result[0][0], result[0][0]], '--', color='k', linewidth=0.7)
+            cx.plot([0, wavelength[0][0]], [result[0][1], result[0][1]], '--', color='k', linewidth=0.7)
+            cx.plot([0, wavelength[0][0]], [result[1], result[1]], '--', color='k', linewidth=0.7)
             cx.legend(numpoints=1)
         else:
             cx.plot(sigmalist, np.array(y), color='g')
@@ -621,17 +623,35 @@ class Detector:
         return d
 
     def calculate_phs(self):
-        phs.calculatePhs(self.calculate_sigma(),self.wavelength[0][0],self.angle,self.blades[0].backscatter,self.threshold, self.calculate_ranges())
+        print("Calculate phs")
+        result = phs.calculatePhs(self.calculate_sigma(),self.wavelength[0][0],self.angle,self.blades[0].backscatter,self.threshold, self.calculate_ranges())
+        self.metadata.update({'phs':result})
 
+    def plot_phs(self,figure):
+        self.calculate_phs()
+        data = self.metadata.get('phs')
+        ax = figure.add_subplot(111)
+        ax.set_xlabel('X')
+        ax.set_ylabel('Energy')
+        ax.plot(data[0], data[4], color ='r', label='1')
+        ax.plot(data[1], data[4], color ='b',label='2')
+        ax.plot(data[2], data[4], color ='g',label='3')
+        ax.plot(data[3], data[4], color ='k',label='4')
+        ax.legend(numpoints=1)
+        ax.grid(True)
+        return ax
+        #  ax.set_ylim([0, (eff[1] * 100 + 1)])
 
 
 if __name__ == '__main__':
+   detector = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, False,'10B4C 2.24g/cm3')
    #detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
-   #detector.calculate_eff()
+   figure= plt.figure()
+   detector.plot_phs(figure)
    #detector.calculate_phs()
    # detector.optimize_thickness_diff()
-   detector_single_mono = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
-   detector_single_mono.plot_thick_vs_eff2()
-   plt.show()
+   #detector_single_mono = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
+   #detector_single_mono.plot_thick_vs_eff2()
+   #plt.show()
 
 
