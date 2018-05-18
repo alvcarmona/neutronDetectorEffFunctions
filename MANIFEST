@@ -18,6 +18,7 @@ neutron_detector_eff_functions/data/B10/10B4C220/IONIZ_Alpha94.py
 neutron_detector_eff_functions/data/B10/10B4C220/IONIZ_Li06.py
 neutron_detector_eff_functions/data/B10/10B4C220/IONIZ_Li94.py
 neutron_detector_eff_functions/data/B10/10B4C220/__init__.py
+neutron_detector_eff_functions/data/B10/10B4C224/Erim_fragments.py
 neutron_detector_eff_functions/data/B10/10B4C224/IONIZ_Linkoping_Alpha06.py
 neutron_detector_eff_functions/data/B10/10B4C224/IONIZ_Linkoping_Alpha94.py
 neutron_detector_eff_functions/data/B10/10B4C224/IONIZ_Linkoping_Li06.py

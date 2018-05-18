@@ -42,8 +42,7 @@ def read_cross_section(lambdalist):
     for l in lambdalist:
         lamen.append(((ht ** 2) * 4 * math.pi ** 2) / (2 * nmass * (l[0] ** 2)) * 1e20 * 6.24e18)
 
-    x, y = np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/Aluminium/AlCrossSect_(n,g).py",
-                      delimiter=',', unpack=True)
+    x, y = np.loadtxt(fname=os.path.dirname(os.path.abspath(__file__)) + "/data/Aluminium/AlCrossSect_(n,g).py",delimiter=',', unpack=True)
     xlog = []
     ylog = []
     lamenlog = []
@@ -53,14 +52,10 @@ def read_cross_section(lambdalist):
         ylog.append(math.log10(v))
     for v in lamen:
         lamenlog.append(math.log10(v))
-    f = interpolate.interp1d(xlog, ylog, kind='cubic')
+    f = interpolate.interp1d(xlog[:1894], ylog[:1894], kind='cubic')
     for v in lamenlog:
         sigma.append(10 ** f(v))
-    # check if interpolation works
-    # xnew = np.linspace(xlog[0], xlog[100], num=41, endpoint=True)
-    # plt.plot(xlog, ylog, 'o', xnew, f(xnew), '--')
     print (lamen)
     print (sigma)
-    plt.show()
     return sigma
 

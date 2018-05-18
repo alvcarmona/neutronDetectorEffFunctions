@@ -32,11 +32,12 @@ class Detector:
 
 
     def calculate_eff(self):
+        #TODO add aluminum
         assert len(self.blades) >= 1
         assert len(self.wavelength) >= 1
         ranges = self.calculate_ranges()
         sigma = self.calculate_sigma()
-        varargin = 1
+        varargin = Aluminium.aluminium(self.blades[0].substrate,self.wavelength,self.angle)
         result = []
         if self.single:
             print ('Boron single layer calculation ')
@@ -58,8 +59,8 @@ class Detector:
             result=[[],0]
             for n in range(0, len(self.blades)):
                 result[0].append([0, 0])
-            for s in sigma:
-                resultpoli.append(efftools.mgeff_depth_profile(thickness, ranges, s, varargin))
+            for i in range(0,len(sigma)):
+                resultpoli.append(efftools.mgeff_depth_profile(thickness, ranges, sigma[i], varargin[i]))
             for i, r in enumerate(resultpoli):
                 for j, ewz in enumerate(resultpoli[i][0]):
                     result[0][j][0] = result[0][j][0] + ewz[0]*self.wavelength[i][1]
@@ -529,6 +530,9 @@ class Detector:
         if len(self.wavelength) > 1:
             print ('optimization for polichromatic wavelength')
             self.wavelength = [[self.calculate_barycenter(), 100]]
+            varargin = Aluminium.aluminium(self.blades[0].substrate, self.wavelength, self.calculate_barycenter())[0]
+        else:
+            varargin = Aluminium.aluminium(self.blades[0].substrate, self.wavelength, self.angle)[0]
         sigma = self.calculate_sigma()
         sigma = sigma[0]
         ranges = self.calculate_ranges()
@@ -537,8 +541,8 @@ class Detector:
         alpha = 0
         dopt = [None] * (len(self.blades))
         for t in thickrange:
-            temp = efftools.efficparam(t,sigma,ranges,1)
-            eff1.append(temp[3])  #no substrate
+            temp = efftools.efficparam(t,sigma,ranges,varargin)
+            eff1.append(temp[3])
         for i in range(len(self.blades)-1, -1, -1):
             tempeff = []
             for j, t in enumerate(thickrange):
@@ -578,10 +582,6 @@ class Detector:
             weight+=w[0]
         return bari/100
 
-    def calculate_varargin(self):
-        thick = self.blades[0].substrate
-        varargin = Aluminium.aluminium(thick,self.wavelength,self.angle)
-        return varargin[0]
 
     @staticmethod
     def json_parser(path):
@@ -624,8 +624,11 @@ class Detector:
 
     def calculate_phs(self):
         print("Calculate phs")
+        self.calculate_eff()
         result = phs.calculatePhs(self.calculate_sigma(),self.wavelength[0][0],self.angle,self.blades[0].backscatter,self.threshold, self.calculate_ranges())
-        self.metadata.update({'phs':result})
+        self.metadata.update({'phs':result[0]})
+        self.metadata.update({'phsB': result[1]})
+        self.metadata.update({'phsT': result[2]})
 
     def plot_phs(self,figure):
         self.calculate_phs()
@@ -644,10 +647,10 @@ class Detector:
 
 
 if __name__ == '__main__':
-   detector = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, False,'10B4C 2.24g/cm3')
+   detector = Detector.build_detector(15, 1, 1, [[10, 100]], 90, 100, False,'10B4C 2.24g/cm3')
    #detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
-   figure= plt.figure()
-   detector.plot_phs(figure)
+   #figure= plt.figure()
+   detector.calculate_eff()
    #detector.calculate_phs()
    # detector.optimize_thickness_diff()
    #detector_single_mono = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
