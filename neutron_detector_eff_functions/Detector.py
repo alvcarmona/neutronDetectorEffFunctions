@@ -381,6 +381,7 @@ class Detector:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
             self.metadata.update({'thickVsEffBack': [thickVsEff[0], np.array(thickVsEff[1])]})
             self.metadata.update({'thickVsEffTrans': [thickVsEff[0], np.array(thickVsEff[2])]})
+            self.metadata.update({'thickVsEff': [thickVsEff[0], np.array(thickVsEff[3])]})
         else:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb(sigmalist, ranges, len(blades))
             self.metadata.update({'thickVsEff': thickVsEff})
