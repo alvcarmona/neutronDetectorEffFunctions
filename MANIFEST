@@ -11,6 +11,8 @@ neutron_detector_eff_functions/PhsCalculator.py
 neutron_detector_eff_functions/__init__.py
 neutron_detector_eff_functions/efftools.py
 neutron_detector_eff_functions/scripts.py
+neutron_detector_eff_functions/data/Aluminium/AlCrossSect_(n,g).py
+neutron_detector_eff_functions/data/Aluminium/__init__.py
 neutron_detector_eff_functions/data/B10/B10CrossSect_(n,a).py
 neutron_detector_eff_functions/data/B10/__init__.py
 neutron_detector_eff_functions/data/B10/10B4C220/IONIZ_Alpha06.py

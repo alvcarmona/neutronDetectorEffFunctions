@@ -379,6 +379,8 @@ class Detector:
 
         if self.single:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb_single(sigmalist, ranges, len(blades))
+            self.metadata.update({'thickVsEffBack': [thickVsEff[0], np.array(thickVsEff[1])]})
+            self.metadata.update({'thickVsEffTrans': [thickVsEff[0], np.array(thickVsEff[2])]})
         else:
             thickVsEff = efftools.metadata_samethick_vs_thickandnb(sigmalist, ranges, len(blades))
             self.metadata.update({'thickVsEff': thickVsEff})
@@ -647,10 +649,10 @@ class Detector:
 
 
 if __name__ == '__main__':
-   detector = Detector.build_detector(15, 1, 1, [[10, 100]], 90, 100, False,'10B4C 2.24g/cm3')
+   detector = Detector.build_detector(15, 1, 1000, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
    #detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
    #figure= plt.figure()
-   detector.calculate_eff()
+   detector.plot_thick_vs_eff_meta()
    #detector.calculate_phs()
    # detector.optimize_thickness_diff()
    #detector_single_mono = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
