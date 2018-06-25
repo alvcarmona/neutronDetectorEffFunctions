@@ -501,8 +501,14 @@ class Detector:
         blades = self.blades
         result = self.calculate_eff()
         wavelength = self.wavelength
-        y = efftools.metadata_diffthick_vs_wave(sigmaeq, blades, ranges, len(blades))
-        self.metadata.update({'effVsWave': [sigmalist, y]})
+        if self.single:
+            y = efftools.metadata_singleLayer_vs_wave(sigmaeq, blades[0].backscatter, ranges, len(blades))
+            self.metadata.update({'effVsWave': [sigmalist, y[2]]})
+            self.metadata.update({'effVsWaveTs': [sigmalist, y[1]]})
+            self.metadata.update({'effVsWaveBs': [sigmalist, y[0]]})
+        else:
+            y = efftools.metadata_diffthick_vs_wave(sigmaeq, blades, ranges, len(blades))
+            self.metadata.update({'effVsWave': [sigmalist, y]})
 
     def optimize_thickness_same(self):
         """sets the thickness of all blades to the most optimal for all the blades with same thickness.
@@ -653,7 +659,7 @@ if __name__ == '__main__':
    detector = Detector.build_detector(15, 1, 1000, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
    #detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
    #figure= plt.figure()
-   detector.plot_thick_vs_eff_meta()
+   detector.plot_eff_vs_wave_meta()
    #detector.calculate_phs()
    # detector.optimize_thickness_diff()
    #detector_single_mono = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
