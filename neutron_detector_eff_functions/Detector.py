@@ -599,7 +599,7 @@ class Detector:
                 data = json.load(data_file)
             wave =[]
             for w in data.get('wavelength'):
-                wave.append([w.get('angstrom'), w.get('%')])
+                wave.append([w.get('angstrom'), w.get('weight')])
             detector = Detector.build_detector(len(data.get('blades')),data.get('blades')[0].get('backscatter'),data.get('blades')[0].get('substrate'),wave, data.get('angle'), data.get('threshold'), data.get('single'), data.get('converterConfiguration'))
             # Access data
             return detector
@@ -623,7 +623,7 @@ class Detector:
         wavelength = []
         for w in self.wavelength:
             wdict = {}
-            wdict["%"] = w[1]
+            wdict["weight"] = w[1]
             wdict["angstrom"] = w[0]
             wavelength.append(wdict)
         d["blades"] = blades
@@ -656,10 +656,10 @@ class Detector:
 
 
 if __name__ == '__main__':
-   detector = Detector.build_detector(15, 1, 1000, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
+   detector = Detector.build_detector(15, 3, 1000, [[10, 100]], 90, 100, False,'10B4C 2.24g/cm3')
    #detector = Detector.json_parser('/Users/alvarocbasanez/workspace/dg_efficiencyCalculator/efficiencyCalculator/exports/detector1.json')
    #figure= plt.figure()
-   detector.plot_eff_vs_wave_meta()
+   detector.calculate_phs()
    #detector.calculate_phs()
    # detector.optimize_thickness_diff()
    #detector_single_mono = Detector.build_detector(15, 1, 0, [[10, 100]], 90, 100, True,'10B4C 2.24g/cm3')
